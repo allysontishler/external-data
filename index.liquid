@@ -3,5 +3,26 @@ layout: layout.liquid
 title: 11ty Boilerplate
 ---
 
-<h1>Yet Another 11ty <strong>Boilerplate</strong></h1>
-<img alt="pine" src="/images/pine.png" width="50" />
+<div class="slide">
+    <div class="product-info" x-data="{ productData: null }"
+      x-init="() => { fetch('https://dummyjson.com/products/1').then(response => response.json()).then(data => productData = data); }">
+      <h1 x-text="productData.title" class="text-2xl font-bold"></h1>
+      <p x-text="productData.description"></p>
+      <p class="font-bold">Price: $<span x-text="productData.price"></span></p>
+    </div>
+    <div class="product-img" x-data="{thumbImage: $fetchjson('https://dummyjson.com/products/1', jsonItem='thumbnail')}">
+      <img alt="thumbnail" x-bind:src="thumbImage" />
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="product-info" x-data="{ productData: null }"
+      x-init="() => { fetch('https://dummyjson.com/products').then(response => response.json()).then(data => productData = data.products[1]); }">
+      <h1 x-text="productData.title" class="text-2xl font-bold"></h1>
+      <p x-text="productData.description"></p>
+      <p class="font-bold">Price: $<span x-text="productData.price"></span></p>
+    </div>
+    <div class="product-img" x-data="{thumbImage: 'https://cdn.dummyjson.com/product-images/2/thumbnail.jpg'}">
+      <img alt="thumbnail" x-bind:src="thumbImage" />
+    </div>
+  </div>
